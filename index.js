@@ -32,4 +32,28 @@
 
 const { default: mongoose } = require("mongoose");
 
-mongoose.connect("mongodb://localhost:27017",{useNewUrlParser: true, useUnifiedTopology: true}).then(() => {console.log("connected")}).catch(err => console.error(err))
+mongoose.connect("mongodb://localhost:27017/sample",{useNewUrlParser: true, useUnifiedTopology: true}).then(() => {console.log("connected")}).catch(err => console.error(err))
+const student = mongoose.Schema({
+    name: String,
+    workout:Boolean,
+    height:Number,
+})
+
+const Student = mongoose.model("Student", student)
+
+
+
+const adder = async () => {
+
+    const ss = new Student({
+        name:"Abhi",
+        workout:true,
+        height:6
+    })
+    console.log('====================================');
+    console.log(ss);
+    console.log('====================================');
+    await ss.save()
+}
+
+adder()
